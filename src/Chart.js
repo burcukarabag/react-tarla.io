@@ -47,21 +47,26 @@ class Chart extends Component {
 
   postCountDel(id){
 
-
-    var array = [...this.state.array]; // make a separate copy of the array
-    console.log(id)
+    if(this.state.array.length>0 ){
+      console.log("IFTEYİZ")
+     var array = [...this.state.array]; // make a separate copy of the array
      for(let i=0; i<this.state.array.length; i++){
+      console.log(this.state.array)
+      console.log(this.state.array.length)
         if(this.state.array[i].title===id){
+          console.log("EŞİTMİŞ")
           var index = array.indexOf(this.state.array[i])
           if (index !== -1) {
+            console.log("filtrele")
               var arr = []
-              array.splice(index, id);
+              array.splice(index, 1);
               this.setState({array: array});
               arr = dataPie.filter(item => item != this.state.array[i])
               dataPie = arr
             }
         }
     };
+
 
 
      for(let i=0; i<this.props.users.length; i++){
@@ -76,7 +81,7 @@ class Chart extends Component {
             for(let i=0; i<location.length; i++){
     
               if(location[i].lat===arr[0].lat && location[i].lng===arr[0].lng){
-                  array_2 = location.filter(item => item != location[i])
+                  array_2 = location.filter(item => item !== location[i])
                   location = array_2
 
               }
@@ -84,6 +89,7 @@ class Chart extends Component {
         }
     };
   }
+}
 
 
   postLocation(id){
@@ -101,12 +107,11 @@ class Chart extends Component {
   render (){
 
 
+
   var flag = true
   if(this.state.array.length>0 ){
     this.state.array.map(item => {
-       console.log(item)
         if(dataPie.indexOf(item)===-1){
-          console.log(item)
           if(dataPie.length>0){
             for(let i=0; i<dataPie.length; i++){
               if(dataPie[i]===item) {
