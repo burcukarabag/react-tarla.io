@@ -1,0 +1,130 @@
+.container{
+    align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+    background-color: #000000;
+    height: 100px;
+}
+
+#App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  background-color: #DCDCDC;
+}
+
+#Map{
+
+   height: 200%;
+   width: 30%;
+   background-color: #ffffff;
+   margin-left: 7%;
+   margin-top: 5%;
+}
+
+#Map h2{
+   
+  
+   
+}
+
+#map {
+
+   margin-top: 20%; 
+   margin-bottom: 12%; 
+
+   height: 460px;
+   width: 100%;
+   position: relative;
+
+}
+
+#chart{
+
+  background-color: #ffffff;
+  float: left;
+  padding: 6%;
+  margin-top: 5%;  
+  margin-right: 8%;
+  float: right;
+
+}
+
+
+
+#chart h2{
+
+   margin-top: -10%;
+   margin-left: 15%;
+
+}
+
+#chart-2{
+
+    width: 65%;
+    height: 65%; 
+    margin-left: 20%;
+    margin-top: 25%;
+
+}
+
+
+
+.table-responsive {
+  background-color: #ffffff;
+  margin-bottom:50px;
+  margin-left:8%;
+  margin-top:50px;
+  margin-right:10%;
+ 
+  
+}
+
+#table-div {
+
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+
+}
+
+.table tbody tr td {
+  vertical-align: top;
+  padding: 0px;
+}
+
+.table {
+   
+}
+
+.table tbody tr:hover {
+  cursor: pointer;
+  background-color: #DDEAF7;
+} 
+
+.table thead {
+  background-color: #F9F9F9;
+
+}
+
+.selected {
+   background-color: #DDEAF7;
+}
+
+.non-select {
+  background-color: #fffffff;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.clearfix {
+
+  clear: both;
+
+}
