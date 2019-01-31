@@ -7,14 +7,14 @@ class Table extends Component {
     constructor(props){
 	    super(props);
 	    this.onCountItem = this.onCountItem.bind(this);
-	    this.state = {'active': false, 'class': ''};
     }
 
     static propTypes = {
 
 		postCount: PropTypes.func,
 		postCountDel: PropTypes.func,
-		postLocation: PropTypes.func
+		postLocation: PropTypes.func,
+		postLocationDel: PropTypes.func,
     };
 
 	onCountItem(e) {
@@ -32,7 +32,7 @@ class Table extends Component {
 
 		else{
 			this.props.postCountDel(e.target.value);
-			
+			this.props.postLocationDel(e.target.value);
 			e.target.parentElement.parentElement.className="non-select"
 
 		}
