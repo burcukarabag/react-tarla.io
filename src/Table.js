@@ -7,6 +7,8 @@ class Table extends Component {
     constructor(props){
 	    super(props);
 	    this.onCountItem = this.onCountItem.bind(this);
+	    this.allCountItem = this.allCountItem.bind(this);
+    
     }
 
     static propTypes = {
@@ -15,9 +17,12 @@ class Table extends Component {
 		postCountDel: PropTypes.func,
 		postLocation: PropTypes.func,
 		postLocationDel: PropTypes.func,
+		countState: PropTypes.func,
+
     };
 
 	onCountItem(e) {
+
 	
 		e.target.ischecked= !e.target.ischecked;
 
@@ -38,19 +43,37 @@ class Table extends Component {
 		}
 
 	}
+
+	allCountItem(e){
+		e.target.ischecked= !e.target.ischecked;
+
+		if (e.target.ischecked) {
+			e.target.parentElement.parentElement.parentElement.parentElement.className="table table-bordered selected"
+		    
+
+		}
+
+		else{
+			
+			e.target.parentElement.parentElement.parentElement.parentElement.className="table table-bordered non-select"
+		}
+	}
 		    
 
 	render(){
+		
 
 		return (
 				
 				<div className={"table-responsive col-xs-9 col-md-10 col-lg-10"}>
-					<h2>User Table</h2>
+					<h2>User Table </h2>
+					<p>{ this.props.countState } rows selected</p>
+
 					<div id="table-div" className={"col-xs-12 col-md-12 col-lg-10"}>
 						<table className={"table table-bordered"}>
 							 <thead>
 							    <tr>
-							      <th><input type="checkbox"></input></th>
+							      <th><input type="checkbox" className="" ischecked="false" onChange={this.allCountItem }></input></th>
 							      <th>id</th>
 							      <th>username</th>
 							      <th>name</th>

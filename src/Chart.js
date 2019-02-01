@@ -24,6 +24,8 @@ class Chart extends Component {
     array: [],
   }
 
+  
+
   rgb2hex(rgb){
      rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
      return (rgb && rgb.length === 4) ? "#" +
@@ -31,6 +33,30 @@ class Chart extends Component {
       ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
       ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
     }
+
+
+  diff_func(color){
+    var flag=false
+    if(this.state.array.length>0){
+      this.state.array.map(arr=> {
+        if(arr.color===color){
+          flag=true
+          var col = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+          col = this.rgb2hex(col)
+          col = this.diff_func(col)
+        }
+
+      });
+      if(flag===false){
+        return color
+      }
+    }
+
+    else{
+      return color
+    }
+
+  }
 
    postCount(id){
       
@@ -45,14 +71,15 @@ class Chart extends Component {
         if(this.props.users[j].id==id){
 
           this.user_name = this.props.users[j].name
-
           var color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
           color = this.rgb2hex(color)
-          let c = [{title:id, value:this.count, color:color, name:this.user_name}]
-          this.setState({ array: [...this.state.array, ...c] })
-          this.count = 0
-          name_user.push({name: this.user_name, color: color, id:id})
-          this.user_name = ""
+          color = this.diff_func(color)
+
+            let c = [{title:id, value:this.count, color:color, name:this.user_name}]
+            this.setState({ array: [...this.state.array, ...c] })
+            this.count = 0
+            name_user.push({name: this.user_name, color: color, id:id})
+            this.user_name = ""    
 
        }
       }
@@ -65,10 +92,11 @@ class Chart extends Component {
         if(this.props.users[i].id==id){
           var lat = this.props.users[i].address.geo.lat;
           var lng = this.props.users[i].address.geo.lng;   
+          var loc_name = this.props.users[i].name;
 
         }        
     };
-    location.push({lat:lat, lng:lng})
+    location.push({lat:lat, lng:lng, name: loc_name })
   }
 
 
@@ -167,7 +195,7 @@ class Chart extends Component {
               <MapComp location= {location} users = {this.props.users} posts = {this.props.posts} ></MapComp>
           
 
-              <Table users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
+              <Table countState = {this.state.array.length} users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
 
       </div>
       
@@ -210,7 +238,7 @@ class Chart extends Component {
           </div>
         <MapComp location= {location}  users = {this.props.users} posts = {this.props.posts} ></MapComp>
  
-        <Table users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
+        <Table countState = {this.state.array.length} users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
       </div>
       
     )
