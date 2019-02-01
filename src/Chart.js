@@ -128,43 +128,47 @@ class Chart extends Component {
    
     return(
      
-      <div>
 
-        <div className={"col-xs-12 col-md-12 col-lg-12 "}>
-          <div id="chart" className={"col-xs-10 col-md-6 col-lg-6 "}>
-            <h2 className={"col-xs-8 col-md-8 col-lg-8"} id="post-text">Posts Percentage</h2>
-            <div id="chart-2" className={"col-xs-12 col-md-12 col-lg-12"}>
-             <ReactSvgPieChart 
-                data={this.state.array}
-                expandOnHover={false}
-                expandSize={80}
-                shrinkOnTouchEnd={false}
-                strokeColor="#fff"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                viewBoxSize={50} 
-              /> 
+        <div className={"row"}>
+          <div id="chart" className={"col-xs-10 col-md-5 col-lg-5 "}>
+            <div id="post-text"><h2 id="post-text">Posts Percentage</h2></div>
+
+            <div id="chart-2" className={"col-xs-10 col-md-5 col-lg-5 "}>
+
+                 <ReactSvgPieChart 
+                    data={this.state.array}
+                    expandOnHover={false}
+                    expandSize={80}
+                    shrinkOnTouchEnd={false}
+                    strokeColor="#fff"
+                    strokeLinejoin="round"
+                    strokeWidth={1}
+                    viewBoxSize={50} 
+                  /> 
+
             </div>
- 
-                {
-                  name_user.map(item=>
+            <div id="color-name">
+              <div id="color-name-2" className={"col-xs-10 col-md-5 col-lg-5 "}> 
+                  
+                     {
+                    name_user.map(item=>
 
-                    <div><div id="color-user" style={{backgroundColor:item.color}}>
-                   
-                    </div>  <div><p>{ item.name }</p></div></div>
+                      <div id="color-user" style={{backgroundColor:item.color}}> 
+                      <ul id="name"><li>{ item.name }</li></ul></div>
 
-                  )
-                }
+                      )
+                    }
+             
+                </div>
+              </div>
+                
+            </div>
+    
+              <MapComp location= {location} users = {this.props.users} posts = {this.props.posts} ></MapComp>
           
 
-          </div>
+              <Table users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
 
-             <MapComp location= {location} users = {this.props.users} posts = {this.props.posts} ></MapComp>
-        </div>
-
-        <Table users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
-
-        <div class="clearfix"></div>
       </div>
       
     )
@@ -174,14 +178,14 @@ class Chart extends Component {
   else{
 
     return(          
-     <div>
-        <div className={"col-xs-12 col-md-12 col-lg-12 "}>
-          <div id="chart" className={"col-xs-10 col-md-6 col-lg-6 "}>
-            <h2 className={"col-xs-8 col-md-8 col-lg-8"} id="post-text">Posts Percentage</h2>
-            <div id="chart-2" className={"col-xs-12 col-md-12 col-lg-12"}>
+
+         <div className={"row"}>
+          <div id="chart" className={"col-xs-10 col-md-5 col-lg-5 "}>
+            <div id="post-text"><h2 id="post-text">Posts Percentage</h2></div>
+            <div id="chart-2" className={"col-xs-10 col-md-5 col-lg-5 "}>
              <ReactSvgPieChart 
                 data={[
-  {title: "Data 1", value: 100, color: "#22594e"},]}
+  {title: "Data 1", value: 100, color: "#ECECEC"},]}
                 expandOnHover={false}
                 expandSize={80}
                 shrinkOnTouchEnd={false}
@@ -191,13 +195,22 @@ class Chart extends Component {
                 viewBoxSize={50} 
               /> 
             </div>
+             <div id="color-name">
+              <div id="color-name-2" className={"col-xs-10 col-md-5 col-lg-5 "}> 
+                  
+                    <div id="color-user" style={{backgroundColor: "#ECECEC"}}> 
+                          <ul id="name">
+                            <li>No User Selected</li>
+                          </ul>
+
+                    </div>
+              </div>
+              </div>
 
           </div>
-          <MapComp location= {location}  users = {this.props.users} posts = {this.props.posts} ></MapComp>
-        </div>
-
+        <MapComp location= {location}  users = {this.props.users} posts = {this.props.posts} ></MapComp>
+ 
         <Table users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
-        <div className="clearfix"></div>
       </div>
       
     )

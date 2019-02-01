@@ -19,9 +19,12 @@ export class MapComp extends Component {
     
       return (
 
-          <div id="Map" className={"col-xs-10 col-md-6 col-lg-6 "}>
+       <div id="Map" className={"col-xs-9 col-md-4 col-lg-4 "}>
             <h2>User Locations</h2>
-            <div id="map"  className={"col-xs-10 col-md-6 col-lg-6 "}>
+            <div id="map"  className={"col-xs-9 col-md-4 col-lg-4 "}>
+               
+              
+
               <Map
                   google={this.props.google}
                   zoom={0}
@@ -41,7 +44,8 @@ export class MapComp extends Component {
         
               </Map>
             </div>
-          </div>
+        </div>
+
     );
 
   }
@@ -50,9 +54,12 @@ export class MapComp extends Component {
   else {
     
     return (
-      <div id="Map" className={"col-xs-10 col-md-6 col-lg-6 "}>
-        <h2>User Locations</h2>
-        <div id="map"  className={"col-xs-10 col-md-6 col-lg-6 "}>
+
+      <div id="Map" className={"col-xs-9 col-md-4 col-lg-4 "}>
+              <h2>User Locations</h2>
+        <div id="map"  className={"col-xs-9 col-md-4 col-lg-4 "}>
+          
+
           <Map
           google={this.props.google}
           zoom={1}

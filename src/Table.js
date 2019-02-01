@@ -44,9 +44,9 @@ class Table extends Component {
 
 		return (
 				
-				<div className={"table-responsive col-xs-10 col-md-10 col-lg-10"}>
+				<div className={"table-responsive col-xs-9 col-md-10 col-lg-10"}>
 					<h2>User Table</h2>
-					<div id="table-div" className={"col-xs-10 col-md-10 col-lg-10"}>
+					<div id="table-div" className={"col-xs-12 col-md-12 col-lg-10"}>
 						<table className={"table table-bordered"}>
 							 <thead>
 							    <tr>

@@ -17,9 +17,8 @@ class App extends Component {
 
     return (
       <div id="App" className={"container"}>
-        <div className={"row"}>
+        <h2 id="tarla">tarla.io</h2>
           <Chart users = {this.props.users} posts = {this.props.posts} ></Chart>
-        </div>
       </div>
     );
   }
