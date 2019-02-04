@@ -27,7 +27,7 @@ class Chart extends Component {
   }
 
   
-  /*rgb to hexadecimal*/
+  /*rgb hexadecimal'e çevriliyor*/
   rgb2hex(rgb){
      rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
      return (rgb && rgb.length === 4) ? "#" +
@@ -36,7 +36,7 @@ class Chart extends Component {
       ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
     }
 
-  /*diyagramda aynı renklerin gelmemesini sağlayan fonksiyon*/
+  /*diyagramda, aynı renklerin gelmemesi sağlanıyor*/
   diff_func(color){
     var flag=false
     if(this.state.array.length>0){
@@ -75,12 +75,12 @@ class Chart extends Component {
         if(this.props.users[j].id==id){
 
           this.user_name = this.props.users[j].name
-          /*rgb biçimde random color üretiyoruz*/
+          /*rgb biçimde random color üretiliyor*/
           var color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-          /*rgb biçimindeki random color'ı hexadecimal renk koduna çeviriyoruz */
+          /*rgb biçimindeki random color hexadecimal renk koduna çevriliyor */
           color = this.rgb2hex(color)
           /*random renk üretiliyor ve renk diyagramında aynı renklerin gelmemesi için
-          diff_func ile kontrol yapıyoruz*/
+          diff_func ile kontrol yapılıyor*/
           color = this.diff_func(color)
 
             let c = [{title:id, value:this.count, color:color, name:this.user_name}]
@@ -105,7 +105,7 @@ class Chart extends Component {
     }
   }
 
-  /* tabloda işaretli olan elemanların id'leri yardımıyla lokasyon bilgilerini alan fonksiyon.
+  /* tabloda işaretli olan elemanların id'leri yardımıyla kullanıcıların lokasyon bilgileri alınıyor.
   bu lokasyon bilgisi location dizisine aktarılarak, Map componentine gönderiliyor.*/
    postLocation(id){
 
@@ -120,7 +120,7 @@ class Chart extends Component {
     location.push({lat:lat, lng:lng, name: loc_name })
   }
 
-  /*parametre olarak aldığı id'ye sahip elemanı state'ten çıkarıyor*/
+  /*parametre olarak aldığı id'ye sahip eleman state'ten çıkarılıyor*/
   postCountDel(id){
 
     if(this.state.array.length>0 ){
@@ -139,7 +139,7 @@ class Chart extends Component {
     };
   }
 }
-   /*parametre olarak aldığı id'ye sahip elemanı location dizisinden çıkarıyor*/
+   /*parametre olarak aldığı id'ye sahip eleman location dizisinden çıkarılıyor*/
   postLocationDel(id){
 
    if(this.state.array.length>0 ){
