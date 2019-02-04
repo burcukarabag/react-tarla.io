@@ -10,7 +10,7 @@ export class MapComp extends Component {
 
     var  loc_arr = []
   
-
+    /*Chart componentinden gelen location, burada işlenerek loc_arr dizisi oluşturuluyor*/
     if(this.props.location.length>0){
       for(let i=0; i<this.props.location.length; i++){
         var lat = this.props.location[i].lat;

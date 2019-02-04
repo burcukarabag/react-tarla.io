@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Table.css';
 import PropTypes from 'prop-types';
 
 class Table extends Component {
@@ -18,43 +17,45 @@ class Table extends Component {
 		postLocation: PropTypes.func,
 		postLocationDel: PropTypes.func,
 		countState: PropTypes.func,
+		allCount: PropTypes.func,
 
     };
 
+    /*liste elemanlarının input'una click yapıldığında çalışan fonksiyon*/
 	onCountItem(e) {
 
-	
-		e.target.ischecked= !e.target.ischecked;
-
-		if (e.target.ischecked) {
+		/*input checked durumundaysa bu koşul çalışır*/
+		if (e.target.checked) {
 			this.props.postCount(e.target.value);
 			this.props.postLocation(e.target.value);
 			e.target.parentElement.parentElement.className="selected"
-		    
-		    
-
 		}
 
 		else{
 			this.props.postCountDel(e.target.value);
 			this.props.postLocationDel(e.target.value);
 			e.target.parentElement.parentElement.className="non-select"
-
 		}
-
 	}
 
 	allCountItem(e){
-		e.target.ischecked= !e.target.ischecked;
+		
 
-		if (e.target.ischecked) {
-			e.target.parentElement.parentElement.parentElement.parentElement.className="table table-bordered selected"
-		    
-
+		if (e.target.checked) {
+			let check = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('tbody').querySelectorAll('input');
+			for(let i=0; i<check.length; i++){
+				check[i].setAttribute('checked', 'true');		
+			}
+			this.props.allCount(check)
+			e.target.parentElement.parentElement.parentElement.parentElement.className="table table-bordered selected";
 		}
 
 		else{
-			
+			let check = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('tbody').querySelectorAll('input');
+			for(let i=0; i<check.length; i++){
+				check[i].removeAttribute('checked', 'true');
+				check[i].setAttribute('unchecked', 'true');
+			}
 			e.target.parentElement.parentElement.parentElement.parentElement.className="table table-bordered non-select"
 		}
 	}
@@ -73,7 +74,7 @@ class Table extends Component {
 						<table className={"table table-bordered"}>
 							 <thead>
 							    <tr>
-							      <th><input type="checkbox" className="" ischecked="false" onChange={this.allCountItem }></input></th>
+							      <th><input type="checkbox" className="" unchedked onChange={this.allCountItem }></input></th>
 							      <th>id</th>
 							      <th>username</th>
 							      <th>name</th>
@@ -88,7 +89,7 @@ class Table extends Component {
 							  	{
 							  		this.props.users.map(user => 
 							  		<tr key={ user.id }>
-							  		  <td><input type="checkbox" className="" value={ user.id } ischecked="false" onChange={this.onCountItem }></input></td>
+							  		  <td><input name="body" type="checkbox" className="" value={ user.id } unchecked onChange={this.onCountItem }></input></td>
 								      <th>{ user.id }</th>
 								      <td>{ user.username }</td>
 								      <td>{ user.name }</td>

@@ -15,17 +15,19 @@ class Chart extends Component {
     this.postCountDel = this.postCountDel.bind(this);
     this.postLocation = this.postLocation.bind(this);
     this.postLocationDel = this.postLocationDel.bind(this);
+    this.allCount= this.allCount.bind(this);
     this.rgb2hex = this.rgb2hex.bind(this);
     this.count = 0;
     this.user_name = "";
   }
 
+ /*seçili olan elemanların listesini tutan state*/
   state = {
     array: [],
   }
 
   
-
+  /*rgb to hexadecimal*/
   rgb2hex(rgb){
      rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
      return (rgb && rgb.length === 4) ? "#" +
@@ -34,7 +36,7 @@ class Chart extends Component {
       ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
     }
 
-
+  /*diyagramda aynı renklerin gelmemesini sağlayan fonksiyon*/
   diff_func(color){
     var flag=false
     if(this.state.array.length>0){
@@ -58,8 +60,10 @@ class Chart extends Component {
 
   }
 
+   /*tabloda işaretli olan elemanların id'si bu fonksiyonda işlenip, state.array dizisine aktarılıyor.*/
    postCount(id){
-      
+     
+
       for(let i=0; i<this.props.posts.length; i++){
         if(this.props.posts[i].userId==id){
           this.count=this.count+1
@@ -71,21 +75,38 @@ class Chart extends Component {
         if(this.props.users[j].id==id){
 
           this.user_name = this.props.users[j].name
+          /*rgb biçimde random color üretiyoruz*/
           var color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+          /*rgb biçimindeki random color'ı hexadecimal renk koduna çeviriyoruz */
           color = this.rgb2hex(color)
+          /*random renk üretiliyor ve renk diyagramında aynı renklerin gelmemesi için
+          diff_func ile kontrol yapıyoruz*/
           color = this.diff_func(color)
 
             let c = [{title:id, value:this.count, color:color, name:this.user_name}]
             this.setState({ array: [...this.state.array, ...c] })
+
             this.count = 0
+            /*isim listesi name_user dizisinde tutuluyor*/
             name_user.push({name: this.user_name, color: color, id:id})
-            this.user_name = ""    
+            this.user_name = "" 
+
 
        }
       }
 
   }
 
+    /*tüm elemanların seçimi. bu kısım eksik. tamamlanacak*/
+  allCount(id){
+    for(let i=0; i<id.length; i++){
+        console.log(id.value)
+        /*this.postCount(id.value)*/
+    }
+  }
+
+  /* tabloda işaretli olan elemanların id'leri yardımıyla lokasyon bilgilerini alan fonksiyon.
+  bu lokasyon bilgisi location dizisine aktarılarak, Map componentine gönderiliyor.*/
    postLocation(id){
 
     for(let i=0; i<this.props.users.length; i++){
@@ -99,7 +120,7 @@ class Chart extends Component {
     location.push({lat:lat, lng:lng, name: loc_name })
   }
 
-
+  /*parametre olarak aldığı id'ye sahip elemanı state'ten çıkarıyor*/
   postCountDel(id){
 
     if(this.state.array.length>0 ){
@@ -118,7 +139,7 @@ class Chart extends Component {
     };
   }
 }
-
+   /*parametre olarak aldığı id'ye sahip elemanı location dizisinden çıkarıyor*/
   postLocationDel(id){
 
    if(this.state.array.length>0 ){
@@ -151,7 +172,9 @@ class Chart extends Component {
   render (){
 
 
- var flag = true
+
+  console.log(this.state.array)
+  /*state'te eleman varsa bu koşul çalıştırılıyor*/
   if(this.state.array.length>0 ){
    
     return(
@@ -195,14 +218,14 @@ class Chart extends Component {
               <MapComp location= {location} users = {this.props.users} posts = {this.props.posts} ></MapComp>
           
 
-              <Table countState = {this.state.array.length} users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
+              <Table allCount = {this.allCount} countState = {this.state.array.length} users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
 
       </div>
       
     )
   }
 
-
+  /*state'e henüz eleman eklenmemişse bu koşul çalıştırılıyor. yani diyagram henüz boş*/
   else{
 
     return(          
@@ -238,7 +261,7 @@ class Chart extends Component {
           </div>
         <MapComp location= {location}  users = {this.props.users} posts = {this.props.posts} ></MapComp>
  
-        <Table countState = {this.state.array.length} users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
+        <Table allCount = {this.allCount} countState = {this.state.array.length} users = {this.props.users} postCountDel={this.postCountDel} postCount={this.postCount} postLocation={this.postLocation} postLocationDel={this.postLocationDel}></Table>
       </div>
       
     )
